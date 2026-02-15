@@ -1,0 +1,220 @@
+.app-shell {
+  height: 100dvh;
+  display: flex;
+}
+
+.sidebar {
+  width: 12.625rem;
+  flex-shrink: 0;
+  background: var(--colors-slate-950, #1d1f22);
+  padding: var(--spacing-300, 1.5rem) var(--spacing-200, 1rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-document {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-300, 1.5rem);
+}
+
+.sidebar-title {
+  color: var(--colors-slate-400, #7c8187);
+}
+
+.new-btn {
+  color: var(--colors-neutral-0, #fff);
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+
+  /* text-preset-6(regular-regular) */
+  font-family: Roboto;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 1.125rem */
+  border-radius: var(--corner-radius-4, 0.25rem);
+  background: var(--colors-orange-600, #e46643);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.new-btn:hover {
+  background: var(--colors-orange-400, #f39765);
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(228, 102, 67, 0.28);
+}
+
+.new-btn:active {
+  transform: scale(1);
+  box-shadow: 0 2px 8px rgba(228, 102, 67, 0.2);
+}
+
+.new-btn:focus-visible {
+  outline: 2px solid var(--colors-neutral-0, #fff);
+  outline-offset: 2px;
+}
+
+.document-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: var(--spacing-200, 1rem);
+}
+
+.document-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-4, 0.25rem);
+  transition: all 0.2s;
+}
+
+.document-item img {
+  width: 0.85713rem;
+  height: 1rem;
+}
+
+.document-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.document-date {
+  color: var(--colors-slate-400, #7c8187);
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+
+  /* text-preset-9(regular-light) */
+  font-family: Roboto;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 115%; /* 0.93438rem */
+}
+.document-name {
+  color: var(--colors-neutral-0, #fff);
+  font-feature-settings:
+    "liga" off,
+    "clig" off;
+
+  /* text-preset-6(regular-regular) */
+  font-family: Roboto;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 1.125rem */
+  transition: all 0.2s;
+}
+
+.document-item:hover .document-name {
+  color: var(--colors-orange-600, #e46643);
+}
+
+.document-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-theme {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100, 0.5rem);
+}
+
+.theme-icon {
+  transition: all 0.2s;
+  opacity: 0.65;
+}
+
+.theme-toggle-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.theme-toggle {
+  width: 3rem;
+  height: 1.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--colors-slate-500, #5a6069);
+  padding: var(--spacing-050, 0.25rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+  order: 2;
+}
+
+.theme-icon--dark {
+  order: 1;
+}
+
+.theme-icon--light {
+  order: 3;
+}
+
+.theme-toggle:hover,
+.theme-toggle-input:focus-visible + .theme-toggle {
+  background: var(--colors-orange-600, #e46643);
+}
+
+.theme-toggle__thumb {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--colors-neutral-0, #fff);
+  transition: all 0.2s;
+}
+
+.theme-toggle-input:checked + .theme-toggle .theme-toggle__thumb {
+  transform: translateX(1.5rem);
+}
+
+.theme-toggle-input:checked ~ .theme-icon--dark {
+  opacity: 0.65;
+  filter: none;
+}
+
+.theme-toggle-input:checked ~ .theme-icon--light {
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.theme-toggle-input:not(:checked) ~ .theme-icon--dark {
+  opacity: 1;
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.theme-toggle-input:not(:checked) ~ .theme-icon--light {
+  opacity: 0.65;
+  filter: none;
+}

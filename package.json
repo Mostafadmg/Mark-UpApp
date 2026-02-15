@@ -1,0 +1,17 @@
+{
+  "name": "in-browser-markdown-editor",
+  "version": "1.0.0",
+  "description": "![Design preview for the In-browser markdown editor coding challenge](./preview.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}

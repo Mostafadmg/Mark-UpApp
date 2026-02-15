@@ -1,0 +1,315 @@
+.app-header {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-slate-800);
+}
+
+.app-header__top {
+  display: flex;
+  min-height: 4.5rem;
+}
+
+.app-header__menu-button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background-color: var(--color-slate-700);
+  padding-inline: var(--spacing-200);
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.app-header__menu-button:hover,
+.app-header__menu-button:focus-visible {
+  background-color: var(--color-orange-600);
+}
+
+.app-header__menu-icon,
+.app-header__document-icon {
+  display: block;
+  transition: all 0.2s;
+}
+
+.app-header__menu-button:hover .app-header__menu-icon,
+.app-header__menu-button:focus-visible .app-header__menu-icon {
+  transform: scale(1.02);
+}
+
+.app-header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-200);
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-150) var(--spacing-200);
+}
+
+.app-header__document-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+  min-width: 0;
+}
+
+.app-header__brand {
+  align-items: center;
+  padding-right: var(--spacing-200);
+  border-right: 1px solid var(--color-slate-500);
+  height: 2.5rem;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .app-header__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.app-header__logo {
+  display: block;
+  width: 7.5rem;
+  height: auto;
+}
+
+.app-header__document {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-150);
+  min-width: 0;
+}
+
+.app-header__document-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-050);
+  min-width: 0;
+}
+
+.app-header__document-label {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: var(--color-slate-400);
+  display: none;
+}
+
+.app-header__document-input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--color-neutral-0);
+  font-family: "Roboto Slab", serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  transition: all 0.2s;
+}
+
+.app-header__quick-actions {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-100);
+  margin-left: auto;
+  margin-right: var(--spacing-100);
+}
+
+.app-header__quick-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-050);
+  padding: var(--spacing-050);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--color-slate-700) 75%, transparent);
+}
+
+.quick-divider {
+  width: 1px;
+  height: 1.75rem;
+  background: var(--color-slate-500);
+  flex-shrink: 0;
+}
+
+.quick-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-slate-300);
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quick-btn img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.quick-btn:hover {
+  color: var(--color-neutral-0);
+  background: color-mix(in srgb, var(--color-slate-500) 70%, transparent);
+}
+
+.quick-btn--active {
+  color: var(--color-orange-400);
+  background: color-mix(in srgb, var(--color-orange-600) 18%, var(--color-slate-500));
+}
+
+.quick-btn:focus-visible {
+  outline: 2px solid var(--color-neutral-0);
+  outline-offset: 2px;
+}
+
+.app-header__action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  border: 0;
+  cursor: pointer;
+}
+
+.app-header__action--delete {
+  background: transparent;
+  padding: var(--spacing-100);
+  transition: all 0.2s;
+}
+
+.app-header__action--delete:hover {
+  transform: scale(1.02);
+}
+.app-header__action--delete:active {
+  transform: scale(1);
+}
+
+.app-header__action--save {
+  background-color: var(--colors-orange-600, #e46643);
+  color: var(--color-neutral-0);
+  border-radius: var(--radius-4);
+  padding: var(--spacing-100) var(--spacing-150);
+  transition: all 0.2s;
+}
+
+.app-header__action--save:hover {
+  background-color: var(--colors-orange-400, #f39765);
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(228, 102, 67, 0.28);
+}
+
+.app-header__action--save:active {
+  transform: scale(1);
+  box-shadow: 0 2px 8px rgba(228, 102, 67, 0.2);
+}
+
+.app-header__action--save:focus-visible {
+  outline: 2px solid var(--color-neutral-0);
+  outline-offset: 2px;
+}
+
+.app-header__action-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 2px;
+  display: none;
+}
+
+.app-header__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+  padding: var(--spacing-150) var(--spacing-200);
+  background: var(--color-slate-800);
+  border-top: 1px solid var(--color-slate-500);
+  overflow-x: auto;
+}
+
+.toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-050);
+  padding: var(--spacing-050);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--color-slate-700) 75%, transparent);
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 1.75rem;
+  background: var(--color-slate-500);
+  flex-shrink: 0;
+}
+
+.toolbar-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-slate-300);
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.toolbar-btn:hover {
+  color: var(--color-neutral-0);
+  background: color-mix(in srgb, var(--color-slate-500) 70%, transparent);
+}
+
+.toolbar-btn--active {
+  color: var(--color-orange-400);
+  background: color-mix(in srgb, var(--color-orange-600) 18%, var(--color-slate-500));
+}
+
+.toolbar-btn:active {
+  transform: scale(1);
+}
+
+.toolbar-btn:focus-visible {
+  outline: 2px solid var(--color-neutral-0);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .app-header__action-text {
+    display: block;
+  }
+
+  .app-header__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .app-header__document-label {
+    display: block;
+  }
+
+  .app-header__quick-actions {
+    display: flex;
+  }
+}
