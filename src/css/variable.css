@@ -1,5 +1,5 @@
 :root {
-  /* Color tokens */
+  /* Color tokens - Raw colors */
   --color-neutral-950: #000000;
   --color-neutral-500: #6f6f6f;
   --color-neutral-200: #e4e4e4;
@@ -18,7 +18,13 @@
   --color-orange-600: #e60013;
   --color-orange-400: #f39765;
 
-  /* Spacing tokens */
+  /* Semantic theme colors - Light theme (default) */
+  --theme-bg-primary: var(--color-neutral-0);
+  --theme-bg-secondary: var(--color-neutral-100);
+  --theme-text-primary: var(--color-neutral-950);
+  --theme-text-secondary: var(--color-neutral-500);
+  --theme-border: var(--color-neutral-200);
+
   --spacing-0: 0;
   --spacing-025: 2px;
   --spacing-050: 4px;
@@ -34,6 +40,17 @@
   --radius-4: 4px;
   --radius-16: 16px;
 }
+
+/* Dark theme overrides */
+[data-theme="dark"] {
+  --theme-bg-primary: var(--color-slate-950);
+  --theme-bg-secondary: var(--color-slate-800);
+  --theme-text-primary: var(--color-neutral-0);
+  --theme-text-secondary: var(--color-slate-300);
+  --theme-border: var(--color-slate-500);
+}
+
+/* Spacing tokens */
 
 /* 2rem */
 .text-1 {

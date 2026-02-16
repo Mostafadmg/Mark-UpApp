@@ -7,6 +7,9 @@
 .app-header__top {
   display: flex;
   min-height: 4.5rem;
+  position: relative;
+  z-index: 3;
+  overflow: visible;
 }
 
 .app-header__menu-button {
@@ -44,6 +47,7 @@
   flex: 1;
   min-width: 0;
   padding: var(--spacing-150) var(--spacing-200);
+  overflow: visible;
 }
 
 .app-header__document-group {
@@ -119,11 +123,68 @@
 }
 
 .app-header__quick-actions {
-  display: none;
-  align-items: center;
-  gap: var(--spacing-100);
+  position: relative;
   margin-left: auto;
   margin-right: var(--spacing-100);
+}
+
+.quick-actions-toggle {
+  list-style: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-slate-300);
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-actions-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.quick-actions-toggle::marker {
+  content: "";
+}
+
+.quick-actions-toggle:hover {
+  color: var(--color-neutral-0);
+  background: color-mix(in srgb, var(--color-slate-500) 70%, transparent);
+}
+
+.app-header__quick-actions[open] .quick-actions-toggle {
+  color: var(--color-orange-400);
+  background: color-mix(in srgb, var(--color-orange-600) 18%, var(--color-slate-500));
+}
+
+.quick-actions-toggle:focus-visible {
+  outline: 2px solid var(--color-neutral-0);
+  outline-offset: 2px;
+}
+
+.app-header__quick-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-100);
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--spacing-100));
+  z-index: 7;
+  min-width: 16rem;
+  padding: var(--spacing-100);
+  border: 1px solid var(--color-slate-500);
+  border-radius: var(--radius-4);
+  background: var(--color-slate-800);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.35);
+}
+
+.app-header__quick-actions:not([open]) .app-header__quick-menu {
+  display: none;
 }
 
 .app-header__quick-group {
@@ -136,10 +197,7 @@
 }
 
 .quick-divider {
-  width: 1px;
-  height: 1.75rem;
-  background: var(--color-slate-500);
-  flex-shrink: 0;
+  display: none;
 }
 
 .quick-btn {
@@ -155,6 +213,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 0;
 }
 
 .quick-btn img {
@@ -239,7 +299,10 @@
   padding: var(--spacing-150) var(--spacing-200);
   background: var(--color-slate-800);
   border-top: 1px solid var(--color-slate-500);
-  overflow-x: auto;
+  overflow: visible;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 6;
 }
 
 .toolbar-group {
@@ -274,11 +337,49 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 0;
+}
+
+.toolbar-btn::after,
+.quick-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2b2d31;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 2147483647;
+}
+
+.quick-btn::after {
+  bottom: auto;
+  top: calc(100% + 8px);
 }
 
 .toolbar-btn:hover {
   color: var(--color-neutral-0);
   background: color-mix(in srgb, var(--color-slate-500) 70%, transparent);
+}
+
+.toolbar-btn:hover::after,
+.quick-btn:hover::after {
+  opacity: 1;
+}
+
+.toolbar-btn:hover,
+.toolbar-btn:focus-visible,
+.quick-btn:hover,
+.quick-btn:focus-visible {
+  z-index: 1000;
 }
 
 .toolbar-btn--active {
@@ -308,8 +409,46 @@
   .app-header__document-label {
     display: block;
   }
+}
 
+@media (min-width: 900px) {
   .app-header__quick-actions {
     display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+  }
+
+  .app-header__quick-actions:not([open]) .app-header__quick-menu {
+    display: flex;
+  }
+
+  .quick-actions-toggle {
+    display: none;
+  }
+
+  .app-header__quick-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+    position: static;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .quick-btn::after {
+    top: auto;
+    bottom: calc(100% + 8px);
+  }
+
+  .quick-divider {
+    width: 1px;
+    height: 1.75rem;
+    background: var(--color-slate-500);
+    flex-shrink: 0;
+    display: block;
   }
 }
