@@ -1,6 +1,7 @@
 import { parseMarkdown } from "./parse.js";
 import { updatePreview } from "./preview.js";
 
+
 export async function initTextarea() {
   const content = await getPlaceholder();
 

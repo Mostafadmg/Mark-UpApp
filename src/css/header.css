@@ -396,11 +396,21 @@
   outline-offset: 2px;
 }
 
-@media (min-width: 768px) {
-  .app-header__action-text {
-    display: block;
+@media (max-width: 767px) {
+  .app-header__top {
+    z-index: 2147483645;
   }
 
+  .app-header__quick-actions {
+    z-index: 2147483646;
+  }
+
+  .app-header__quick-actions[open] .app-header__quick-menu {
+    z-index: 2147483647;
+  }
+}
+
+@media (min-width: 768px) {
   .app-header__brand {
     display: flex;
     align-items: center;
@@ -411,7 +421,7 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .app-header__quick-actions {
     display: flex;
     align-items: center;
@@ -449,6 +459,12 @@
     height: 1.75rem;
     background: var(--color-slate-500);
     flex-shrink: 0;
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-header__action-text {
     display: block;
   }
 }
