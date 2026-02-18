@@ -1,27 +1,21 @@
+import { updateTheme } from "./state.js";
+
 export function initTheme() {
   const themeInput = document.querySelector(".theme-toggle-input");
-
-  if (!themeInput) {
-    return;
-  }
-
-  const root = document.documentElement;
+  if (!themeInput) return;
 
   function toggleTheme() {
-    const isChecked = themeInput.checked;
+    const theme = themeInput.checked ? "light" : "dark";
+    const newTheme = updateTheme(theme); // ← Gets new value back
 
-    if (isChecked) {
-      root.setAttribute("data-theme", "light");
-      console.log("Theme: LIGHT");
+    // THIS module handles its own DOM
+    if (newTheme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
     } else {
-      root.removeAttribute("data-theme");
-      console.log("Theme: DARK");
+      document.documentElement.removeAttribute("data-theme");
     }
   }
 
-  // Initialize theme on load
   toggleTheme();
-
-  // Listen for changes
   themeInput.addEventListener("change", toggleTheme);
 }

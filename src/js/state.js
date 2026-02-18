@@ -17,3 +17,13 @@ const appState = {
     // More documents...
   ],
 };
+export function updateTheme(theme) {
+  if (appState.theme === theme) return;
+  appState.theme = theme;
+  return appState.theme; // ← Just return, no DOM
+}
+
+export function updateSidebar() {
+  appState.sidebarOpen = !appState.sidebarOpen;
+  return appState.sidebarOpen; // ← Just return, no DOM
+}

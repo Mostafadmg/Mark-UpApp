@@ -1,3 +1,4 @@
+import { initTextarea } from "./editor.js";
 import { initSidebar } from "./sidebar.js";
 import { initTheme } from "./theme.js";
 
@@ -5,3 +6,4 @@ import { initTheme } from "./theme.js";
 
 initSidebar();
 initTheme();
+initTextarea();
