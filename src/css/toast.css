@@ -1,0 +1,146 @@
+.app-toast-stack {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.75rem;
+  width: 100%;
+  max-height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  list-style: none;
+  pointer-events: none;
+}
+
+.app-toast {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--theme-border, #5a6069);
+  border-radius: var(--radius-4, 0.25rem);
+  background: var(--theme-bg-secondary, #2b2d31);
+  color: var(--theme-text-primary, #ffffff);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  padding: 1.25rem 2.25rem 1.25rem 1.25rem;
+  pointer-events: auto;
+  user-select: none;
+  touch-action: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.app-toast[data-state="closed"] {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.app-toast__body {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.app-toast__title,
+.app-toast__message {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+}
+
+.app-toast__title {
+  font-weight: 600;
+}
+
+.app-toast__message {
+  opacity: 0.9;
+}
+
+.app-toast__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-4, 0.25rem);
+  background: transparent;
+  color: color-mix(in srgb, currentColor 55%, transparent);
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.app-toast:hover .app-toast__close,
+.app-toast__close:focus-visible {
+  opacity: 1;
+}
+
+.app-toast__close:hover {
+  color: currentColor;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.app-toast__close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.app-toast__close-icon {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .app-toast-stack {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-toast-stack {
+    max-width: 420px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.app-toast {
+  animation: slideUp 0.3s ease forwards;
+}
+
+.app-toast--exit {
+  animation: slideRight 0.3s ease forwards;
+}

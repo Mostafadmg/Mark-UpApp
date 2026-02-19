@@ -1,10 +1,12 @@
-const appState = {
+export const appState = {
   // UI State
   theme: "light", // "light" or "dark"
   sidebarOpen: false, // boolean
 
   // Document Management
   currentDocumentId: null, // null or string (e.g., "doc_123")
+
+  display: "split",
 
   documents: [
     {
@@ -14,7 +16,6 @@ const appState = {
       createdAt: 1703001234567,
       updatedAt: 1703001234567,
     },
-    // More documents...
   ],
 };
 export function updateTheme(theme) {
@@ -26,4 +27,8 @@ export function updateTheme(theme) {
 export function updateSidebar() {
   appState.sidebarOpen = !appState.sidebarOpen;
   return appState.sidebarOpen; // ← Just return, no DOM
+}
+
+export function updateDisplay(display) {
+  appState.display = display;
 }

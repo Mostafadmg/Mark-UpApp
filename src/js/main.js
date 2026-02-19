@@ -2,7 +2,8 @@ import { initTextarea } from "./editor.js";
 import { initSidebar } from "./sidebar.js";
 import { initTheme } from "./theme.js";
 import { initToolbar } from "./toolbar.js";
-
+import { initView } from "./view.js";
+import { initActions } from "./action.js";
 // Get the menu button
 
 function initQuickActionsMode() {
@@ -33,4 +34,6 @@ initSidebar();
 initTheme();
 initTextarea();
 initQuickActionsMode();
-initToolbar()
+initToolbar();
+initView();
+initActions();

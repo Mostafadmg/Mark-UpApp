@@ -74,6 +74,7 @@
               class="app-header__menu-button"
               type="button"
               aria-label="Toggle menu"
+              data-tooltip="Menu"
             >
               <img
                 class="app-header__menu-icon"
@@ -86,11 +87,7 @@
             <div class="app-header__content">
               <div class="app-header__document-group">
                 <div class="app-header__brand">
-                  <img
-                    class="app-header__logo"
-                    src="/assets/logo.svg"
-                    alt="Markdown logo"
-                  />
+                  <img class="app-header__logo" src="/assets/logo.svg" alt="Markdown logo" />
                 </div>
 
                 <div class="app-header__document">
@@ -116,7 +113,11 @@
               </div>
 
               <details class="app-header__quick-actions">
-                <summary class="quick-actions-toggle" aria-label="Toggle quick actions">
+                <summary
+                  class="quick-actions-toggle"
+                  aria-label="Toggle quick actions"
+                  data-tooltip="Quick actions"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -135,16 +136,14 @@
                   </svg>
                 </summary>
 
-                <div
-                  class="app-header__quick-menu"
-                  role="toolbar"
-                  aria-label="Quick actions"
-                >
+                <div class="app-header__quick-menu" role="toolbar" aria-label="Quick actions">
                   <div class="app-header__quick-group">
                     <button
                       class="quick-btn"
                       type="button"
                       aria-label="Edit"
+                      data-view-control
+                      data-action="editor"
                       data-tooltip="Edit"
                     >
                       <svg
@@ -167,6 +166,8 @@
                       class="quick-btn quick-btn--active"
                       type="button"
                       aria-label="Branch"
+                      data-view-control
+                      data-action="split"
                       data-tooltip="Branch"
                     >
                       <svg
@@ -191,6 +192,8 @@
                       class="quick-btn"
                       type="button"
                       aria-label="Preview"
+                      data-view-control
+                      data-action="preview"
                       data-tooltip="Preview"
                     >
                       <svg
@@ -217,6 +220,7 @@
                     class="quick-btn"
                     type="button"
                     aria-label="Copy"
+                    data-quick-action="copy"
                     data-tooltip="Copy"
                   >
                     <svg
@@ -232,15 +236,14 @@
                       aria-hidden="true"
                     >
                       <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-                      <path
-                        d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                      ></path>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
                   </button>
                   <button
                     class="quick-btn"
                     type="button"
                     aria-label="Download"
+                    data-quick-action="download"
                     data-tooltip="Download"
                   >
                     <svg
@@ -264,6 +267,7 @@
                     class="quick-btn"
                     type="button"
                     aria-label="Read mode"
+                    data-quick-action="read-mode"
                     data-tooltip="Read mode"
                   >
                     <svg
@@ -289,6 +293,7 @@
                     class="quick-btn"
                     type="button"
                     aria-label="Delete"
+                    data-quick-action="delete"
                     data-tooltip="Delete"
                   >
                     <svg
@@ -314,7 +319,11 @@
               </details>
 
               <div class="app-header__actions">
-                <button class="app-header__action app-header__action--save" type="button">
+                <button
+                  class="app-header__action app-header__action--save"
+                  type="button"
+                  data-tooltip="Save changes"
+                >
                   <img src="/assets/icon-save.svg" alt="" aria-hidden="true" />
                   <span class="app-header__action-text">Save changes</span>
                 </button>
@@ -322,11 +331,7 @@
             </div>
           </div>
 
-          <div
-            class="app-header__toolbar"
-            role="toolbar"
-            aria-label="Markdown formatting"
-          >
+          <div class="app-header__toolbar" role="toolbar" aria-label="Markdown formatting">
             <button
               class="toolbar-btn"
               type="button"
@@ -347,7 +352,9 @@
                 class="lucide lucide-bold"
                 aria-hidden="true"
               >
-                <path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"></path>
+                <path
+                  d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"
+                ></path>
               </svg>
             </button>
             <button
@@ -539,8 +546,12 @@
                 class="lucide lucide-quote"
                 aria-hidden="true"
               >
-                <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path>
-                <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path>
+                <path
+                  d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                ></path>
+                <path
+                  d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                ></path>
               </svg>
             </button>
             <button
@@ -626,9 +637,11 @@
               <button
                 class="preview-toggle preview-toggle--editor"
                 type="button"
+                data-view-toggle
+                data-action="editor"
                 aria-label="Show preview panel"
               >
-                <img src="/assets/icon-show-preview.svg" alt="" aria-hidden="true" />
+                <img src="/assets/icon-hide-preview.svg" alt="" aria-hidden="true" />
               </button>
             </div>
 
@@ -644,6 +657,8 @@
               <button
                 class="preview-toggle preview-toggle--preview"
                 type="button"
+                data-view-toggle
+                data-action="preview"
                 aria-label="Hide preview panel"
               >
                 <img src="/assets/icon-show-preview.svg" alt="" aria-hidden="true" />
@@ -657,6 +672,7 @@
           </section>
         </main>
       </div>
+      <ol class="app-toast-stack" tabindex="-1"></ol>
     </div>
     <script type="module" src="/src/js/main.js"></script>
   </body>
