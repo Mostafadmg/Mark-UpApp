@@ -29,6 +29,8 @@ export function initView() {
       const mode = btn.dataset.action;
       updateDisplay(mode);
       renderState(mode);
+      viewBtns.forEach((b) => b.classList.remove("quick-btn--active"));
+      btn.classList.add("quick-btn--active");
     });
   });
 

@@ -4,18 +4,35 @@ export function initTheme() {
   const themeInput = document.querySelector(".theme-toggle-input");
   if (!themeInput) return;
 
-  function toggleTheme() {
-    const theme = themeInput.checked ? "light" : "dark";
-    const newTheme = updateTheme(theme); // ← Gets new value back
+  const root = document.documentElement;
+  let transitionTimeoutId;
 
-    // THIS module handles its own DOM
-    if (newTheme === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
+  function applyTheme(theme, animate = false) {
+    if (animate) {
+      root.classList.add("theme-switching");
+    }
+
+    if (theme === "light") {
+      root.setAttribute("data-theme", "light");
     } else {
-      document.documentElement.removeAttribute("data-theme");
+      root.removeAttribute("data-theme");
+    }
+
+    if (animate) {
+      window.clearTimeout(transitionTimeoutId);
+      transitionTimeoutId = window.setTimeout(() => {
+        root.classList.remove("theme-switching");
+      }, 220);
     }
   }
 
-  toggleTheme();
-  themeInput.addEventListener("change", toggleTheme);
+  const initialTheme = themeInput.checked ? "light" : "dark";
+  updateTheme(initialTheme);
+  applyTheme(initialTheme);
+
+  themeInput.addEventListener("change", () => {
+    const nextTheme = themeInput.checked ? "light" : "dark";
+    updateTheme(nextTheme);
+    applyTheme(nextTheme, true);
+  });
 }

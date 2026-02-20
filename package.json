@@ -1,22 +1,25 @@
 {
-  "name": "in-browser-markdown-editor",
-  "version": "1.0.0",
-  "description": "![Design preview for the In-browser markdown editor coding challenge](./preview.jpg)",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "prettier": "^3.8.1",
-    "tailwindcss": "^4.1.18",
-    "vite": "^7.3.1"
-  }
+    "name": "in-browser-markdown-editor",
+    "version": "1.0.0",
+    "description": "![Design preview for the In-browser markdown editor coding challenge](./preview.jpg)",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.1.18",
+        "gh-pages": "^6.3.0",
+        "prettier": "^3.8.1",
+        "tailwindcss": "^4.1.18",
+        "vite": "^7.3.1"
+    }
 }

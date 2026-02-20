@@ -1,4 +1,4 @@
-import { parseMarkdown } from "./parse";
+import { parseMarkdown } from "./parse.js";
 import { updatePreview } from "./preview.js";
 
 function insertMarkDown(textarea, action) {

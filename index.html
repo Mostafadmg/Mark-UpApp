@@ -12,7 +12,7 @@
     />
 
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
-    <link rel="stylesheet" href="/src/css/main.css" />
+    <link rel="stylesheet" href="./src/css/main.css" />
 
     <title>Frontend Mentor | In-browser markdown editor</title>
   </head>
@@ -22,30 +22,8 @@
         <div class="sidebar-document">
           <h2 class="text-9 sidebar-title">MY DOCUMENTS</h2>
           <div class="sidebar-content">
-            <button class="new-btn" data-btn-action="new-document">+ New Document</button>
-            <div class="document-items">
-              <button class="document-item" type="button">
-                <img src="/assets/icon-document.svg" alt="" />
-                <div class="document-info">
-                  <p class="document-date">01 April 2022</p>
-                  <p class="document-name">welcome.md</p>
-                </div>
-              </button>
-              <button class="document-item" type="button">
-                <img src="/assets/icon-document.svg" alt="" />
-                <div class="document-info">
-                  <p class="document-date">01 April 2022</p>
-                  <p class="document-name">welcome.md</p>
-                </div>
-              </button>
-              <button class="document-item" type="button">
-                <img src="/assets/icon-document.svg" alt="" />
-                <div class="document-info">
-                  <p class="document-date">01 April 2022</p>
-                  <p class="document-name">welcome.md</p>
-                </div>
-              </button>
-            </div>
+            <button class="new-btn" data-quick-action="new-document">+ New Document</button>
+            <div class="document-items" id="document-items"></div>
           </div>
         </div>
         <div class="sidebar-theme">
@@ -55,13 +33,13 @@
           </label>
           <img
             class="theme-icon theme-icon--dark"
-            src="/assets/icon-dark-mode.svg"
+            src="./assets/icon-dark-mode.svg"
             alt=""
             aria-hidden="true"
           />
           <img
             class="theme-icon theme-icon--light"
-            src="/assets/icon-light-mode.svg"
+            src="./assets/icon-light-mode.svg"
             alt=""
             aria-hidden="true"
           />
@@ -78,7 +56,7 @@
             >
               <img
                 class="app-header__menu-icon"
-                src="/assets/icon-menu.svg"
+                src="./assets/icon-menu.svg"
                 alt=""
                 aria-hidden="true"
               />
@@ -87,13 +65,13 @@
             <div class="app-header__content">
               <div class="app-header__document-group">
                 <div class="app-header__brand">
-                  <img class="app-header__logo" src="/assets/logo.svg" alt="Markdown logo" />
+                  <img class="app-header__logo" src="./assets/logo.svg" alt="Markdown logo" />
                 </div>
 
                 <div class="app-header__document">
                   <img
                     class="app-header__document-icon"
-                    src="/assets/icon-document.svg"
+                    src="./assets/icon-document.svg"
                     alt=""
                     aria-hidden="true"
                   />
@@ -266,32 +244,6 @@
                   <button
                     class="quick-btn"
                     type="button"
-                    aria-label="Read mode"
-                    data-quick-action="read-mode"
-                    data-tooltip="Read mode"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M2 3h7a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                      <path d="M22 3h-7a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h8z"></path>
-                    </svg>
-                  </button>
-
-                  <span class="quick-divider" aria-hidden="true"></span>
-
-                  <button
-                    class="quick-btn"
-                    type="button"
                     aria-label="Delete"
                     data-quick-action="delete"
                     data-tooltip="Delete"
@@ -322,9 +274,10 @@
                 <button
                   class="app-header__action app-header__action--save"
                   type="button"
+                  data-quick-action="save"
                   data-tooltip="Save changes"
                 >
-                  <img src="/assets/icon-save.svg" alt="" aria-hidden="true" />
+                  <img src="./assets/icon-save.svg" alt="" aria-hidden="true" />
                   <span class="app-header__action-text">Save changes</span>
                 </button>
               </div>
@@ -641,7 +594,7 @@
                 data-action="editor"
                 aria-label="Show preview panel"
               >
-                <img src="/assets/icon-hide-preview.svg" alt="" aria-hidden="true" />
+                <img src="./assets/icon-hide-preview.svg" alt="" aria-hidden="true" />
               </button>
             </div>
 
@@ -661,7 +614,7 @@
                 data-action="preview"
                 aria-label="Hide preview panel"
               >
-                <img src="/assets/icon-show-preview.svg" alt="" aria-hidden="true" />
+                <img src="./assets/icon-show-preview.svg" alt="" aria-hidden="true" />
               </button>
             </div>
 
@@ -674,6 +627,27 @@
       </div>
       <ol class="app-toast-stack" tabindex="-1"></ol>
     </div>
-    <script type="module" src="/src/js/main.js"></script>
+    <dialog class="modal" id="delete-modal">
+      <h2 class="modal__title">Delete this document?</h2>
+      <p class="modal__message">
+        Are you sure you want to delete
+        <span id="modal-doc-name" class="modal__doc-name">welcome.md</span>? This action cannot be
+        undone.
+      </p>
+      <div class="modal__actions">
+        <button
+          class="modal__btn modal__btn--cancel"
+          type="button"
+          id="cancel"
+          data-action="cancel"
+        >
+          Cancel
+        </button>
+        <button class="modal__btn modal__btn--confirm" type="button" data-action="delete-document">
+          Delete now
+        </button>
+      </div>
+    </dialog>
+    <script type="module" src="./src/js/main.js"></script>
   </body>
 </html>

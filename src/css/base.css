@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --theme-transition-duration: 180ms;
+  --theme-transition-easing: ease;
+}
+
 html,
 body {
   height: 100%;
@@ -18,6 +23,28 @@ html {
 
 [data-theme="light"] {
   color-scheme: light;
+}
+
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-easing) !important,
+    color var(--theme-transition-duration) var(--theme-transition-easing) !important,
+    border-color var(--theme-transition-duration) var(--theme-transition-easing) !important,
+    box-shadow var(--theme-transition-duration) var(--theme-transition-easing) !important,
+    fill var(--theme-transition-duration) var(--theme-transition-easing) !important,
+    stroke var(--theme-transition-duration) var(--theme-transition-easing) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-switching,
+  html.theme-switching *,
+  html.theme-switching *::before,
+  html.theme-switching *::after {
+    transition: none !important;
+  }
 }
 
 /* Match scrollbars to active theme across editor, preview, sidebar, and body. */

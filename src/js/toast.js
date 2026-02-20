@@ -11,7 +11,7 @@ export function showToast(title, message) {
           data-radix-collection-item=""
         >
           <div class="app-toast__body">
-            <p class="app-toast__title">${title}!</p>
+            <p class="app-toast__title">${title} !</p>
             <p class="app-toast__message">${message}</p>
           </div>
           <button
