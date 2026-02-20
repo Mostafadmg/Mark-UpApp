@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@400&family=Roboto+Slab:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/Mark-UpApp/assets/favicon-32x32-DQjEQYWa.png" />
+
+    <title>Frontend Mentor | In-browser markdown editor</title>
+    <script type="module" crossorigin src="/Mark-UpApp/assets/index-BR7ejN3x.js"></script>
+    <link rel="stylesheet" crossorigin href="/Mark-UpApp/assets/index-DvObEQ-c.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-document">
+          <h2 class="text-9 sidebar-title">MY DOCUMENTS</h2>
+          <div class="sidebar-content">
+            <button class="new-btn" data-quick-action="new-document">+ New Document</button>
+            <div class="document-items" id="document-items"></div>
+          </div>
+        </div>
+        <div class="sidebar-theme">
+          <input class="theme-toggle-input" type="checkbox" id="theme-toggle" />
+          <label class="theme-toggle" for="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-toggle__thumb"></span>
+          </label>
+          <img
+            class="theme-icon theme-icon--dark"
+            src="data:image/svg+xml,%3csvg%20width='17'%20height='16'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M16.141%208.804a.823.823%200%200%200-.864-.115%206.622%206.622%200%200%201-2.772.6A6.704%206.704%200%200%201%205.81%202.626%207.066%207.066%200%200%201%206.015.981a.823.823%200%200%200-1.094-.93%208.341%208.341%200%201%200%2011.516%209.617.823.823%200%200%200-.296-.864Zm-7.814%205.503A6.696%206.696%200%200%201%204.164%202.404v.222a8.35%208.35%200%200%200%2010.069%208.16%206.671%206.671%200%200%201-5.906%203.554v-.033Z'%20fill='%235A6069'/%3e%3c/svg%3e"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            class="theme-icon theme-icon--light"
+            src="data:image/svg+xml,%3csvg%20width='18'%20height='18'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.7%209a.9.9%200%200%200-.9-.9H.9a.9.9%200%200%200%200%201.8h.9a.9.9%200%200%200%20.9-.9Zm.576%204.5-.639.639a.9.9%200%200%200%200%201.269.9.9%200%200%200%201.269%200l.639-.639A.9.9%200%200%200%203.276%2013.5ZM9%202.7a.9.9%200%200%200%20.9-.9V.9a.9.9%200%200%200-1.8%200v.9a.9.9%200%200%200%20.9.9Zm5.094%202.106a.9.9%200%200%200%20.63-.261l.639-.639a.9.9%200%201%200-1.269-1.269l-.594.639a.9.9%200%200%200%200%201.269.9.9%200%200%200%20.594.261Zm-10.8-.261a.9.9%200%200%200%201.269%200%20.9.9%200%200%200%200-1.269l-.639-.639a.904.904%200%201%200-1.287%201.269l.657.639ZM17.1%208.1h-.9a.9.9%200%201%200%200%201.8h.9a.9.9%200%201%200%200-1.8Zm-2.376%205.4a.9.9%200%200%200-1.224%201.224l.639.639a.9.9%200%200%200%201.269%200%20.9.9%200%200%200%200-1.269l-.684-.594ZM9%204.05A4.95%204.95%200%201%200%2013.95%209%204.959%204.959%200%200%200%209%204.05Zm0%208.1a3.15%203.15%200%201%201%200-6.3%203.15%203.15%200%200%201%200%206.3Zm0%203.15a.9.9%200%200%200-.9.9v.9a.9.9%200%201%200%201.8%200v-.9a.9.9%200%200%200-.9-.9Z'%20fill='%235A6069'/%3e%3c/svg%3e"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      </aside>
+      <div class="app-content">
+        <header class="app-header">
+          <div class="app-header__top">
+            <button
+              class="app-header__menu-button"
+              type="button"
+              aria-label="Toggle menu"
+              data-tooltip="Menu"
+            >
+              <img
+                class="app-header__menu-icon"
+                src="data:image/svg+xml,%3csvg%20width='30'%20height='18'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20fill='%23FFF'%20fill-rule='evenodd'%3e%3cpath%20d='M0%200h30v2H0zM0%208h30v2H0zM0%2016h30v2H0z'/%3e%3c/g%3e%3c/svg%3e"
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
+
+            <div class="app-header__content">
+              <div class="app-header__document-group">
+                <div class="app-header__brand">
+                  <img class="app-header__logo" src="data:image/svg+xml,%3csvg%20width='130'%20height='12'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M.75%2011c.075-.56.147-1.12.218-1.68.07-.56.145-1.168.224-1.823l.443-3.585c.085-.645.163-1.255.232-1.83L2.086.305h2.497c.24.61.47%201.193.687%201.75.217.558.433%201.112.649%201.662l1.274%203.27h.165l1.238-3.262.626-1.65c.208-.546.427-1.136.656-1.77h2.468a1660.544%201660.544%200%200%200%20.457%203.615l.458%203.6c.08.65.156%201.25.229%201.8.072.55.143%201.11.213%201.68h-2.347c-.09-.75-.178-1.463-.263-2.138-.085-.675-.162-1.308-.232-1.897l-.315-2.535h-.165l-.93%202.722c-.225.67-.451%201.334-.679%201.991-.227.658-.439%201.276-.634%201.856H6.502a322.988%20322.988%200%200%200-.952-2.523c-.17-.448-.337-.887-.502-1.317L4.013%204.43h-.165L3.54%206.95c-.07.595-.146%201.232-.229%201.91l-.258%202.14H.75Zm19.017%200a578.89%20578.89%200%200%200%201.186-3.623L22.16%203.71c.215-.665.41-1.264.585-1.797.175-.532.35-1.069.525-1.609h3.18a469.731%20469.731%200%200%200%201.11%203.406l1.193%203.675c.195.59.393%201.197.596%201.822l.581%201.792h-2.55a515.072%20515.072%200%200%200-.982-3.45l-1.47-5.152h-.18l-1.486%205.1c-.16.555-.328%201.136-.506%201.744l-.514%201.758h-2.475Zm2.58-2.236.263-1.845h4.777l.21%201.846h-5.25ZM36.28%2011V.303h4.103c.87%200%201.606.097%202.208.29.603.192%201.06.513%201.373.963.312.45.468%201.063.468%201.838%200%20.615-.12%201.167-.363%201.657s-.632.878-1.166%201.163c-.535.284-1.236.427-2.1.427l.952-.9%201.455%202.145.72%201.061.746%201.103c.243.357.456.673.642.948H42.52c-.27-.42-.53-.822-.78-1.207-.25-.385-.492-.76-.727-1.125l-1.733-2.73%201.462%201.117H38.26V5.293h1.785c.4%200%20.736-.049%201.009-.146.272-.098.478-.264.618-.499s.21-.558.21-.968c0-.304-.044-.55-.134-.738a1.092%201.092%200%200%200-.364-.439%201.314%201.314%200%200%200-.51-.21%203.08%203.08%200%200%200-.567-.052h-3.36L38.703.694V11H36.28Zm21.538%200c-.33-.476-.642-.922-.934-1.34-.293-.417-.579-.828-.859-1.233l-1.41-2.018h-.69V4.475h.66l1.26-1.65a293.263%20293.263%200%200%200%201.92-2.52h2.843a323.846%20323.846%200%200%200-2.693%203.315L56.22%205.712l-.045-1.088%201.883%202.603a1120.463%201120.463%200%200%201%201.904%202.633c.316.434.593.815.833%201.14h-2.977Zm-6.158%200V.303h2.46V11h-2.46Zm15.478%200V.303H71.39c.815%200%201.54.118%202.175.353.635.235%201.171.58%201.609%201.035a4.525%204.525%200%200%201%201.001%201.669c.23.657.345%201.408.345%202.253%200%20.755-.101%201.46-.304%202.112a4.523%204.523%200%200%201-.967%201.713c-.443.49-1.026.873-1.751%201.148-.726.275-1.61.412-2.656.412H67.138Zm2.467-1.973h1.23c.77%200%201.381-.15%201.834-.45.452-.3.779-.71.978-1.23.2-.52.3-1.108.3-1.763%200-.494-.058-.944-.176-1.35a2.869%202.869%200%200%200-.54-1.046%202.374%202.374%200%200%200-.926-.675c-.375-.157-.823-.236-1.343-.236h-1.357V9.027Zm18.635%202.175c-.965%200-1.8-.149-2.505-.446-.705-.298-1.285-.705-1.74-1.223a5.116%205.116%200%200%201-1.016-1.773%206.574%206.574%200%200%201-.334-2.1c0-1.04.206-1.982.619-2.824A4.743%204.743%200%200%201%2085.109.83c.817-.495%201.839-.743%203.064-.743.93%200%201.742.144%202.437.431a4.759%204.759%200%200%201%201.736%201.196c.463.51.809%201.1%201.039%201.77.23.67.345%201.39.345%202.16%200%201.065-.211%202.015-.634%202.85a4.769%204.769%200%200%201-1.856%201.98c-.815.486-1.815.728-3%20.728Zm-.037-2.033c.495%200%20.927-.093%201.297-.28.37-.188.677-.447.922-.777.246-.33.43-.706.552-1.129.122-.422.183-.869.183-1.338%200-.495-.066-.957-.198-1.384a3.428%203.428%200%200%200-.578-1.121%202.67%202.67%200%200%200-.926-.75%202.796%202.796%200%200%200-1.252-.27c-.486%200-.914.092-1.287.277a2.63%202.63%200%200%200-.933.769c-.25.327-.44.704-.57%201.128a4.59%204.59%200%200%200-.195%201.35c0%20.475.062.924.187%201.347.125.422.311.797.559%201.125.247.327.557.585.93.772.372.188.808.281%201.308.281ZM102.105%2011l-.45-1.698c-.16-.603-.31-1.162-.45-1.677l-.885-3.36a559.983%20559.983%200%200%201-1.05-3.96h2.782a1464.078%201464.078%200%200%200%20.855%204.125l.743%203.638h.188l.765-3.683c.09-.42.183-.863.28-1.33l.297-1.407.285-1.343h2.632a1211.281%201211.281%200%200%200%20.886%204.095l.794%203.668h.18l.758-3.69c.13-.63.269-1.307.416-2.032l.416-2.04h2.79c-.175.635-.356%201.302-.543%202.002-.188.7-.361%201.345-.522%201.935l-.915%203.382c-.144.53-.297%201.096-.457%201.696-.16.6-.313%201.16-.458%201.68h-3c-.14-.6-.287-1.23-.442-1.887-.155-.657-.3-1.284-.435-1.878l-.795-3.39h-.188l-.764%203.39c-.13.59-.272%201.217-.424%201.882-.153.665-.297%201.292-.431%201.882h-2.858Zm18.605%200V.304h2.153c.5.73.972%201.42%201.417%202.067l1.335%201.946%201.74%202.52h.18V.304h2.317V11h-2.13c-.41-.6-.84-1.225-1.29-1.875l-1.477-2.13-1.763-2.55h-.172V11h-2.31Z'%20fill='%23FFF'/%3e%3c/svg%3e" alt="Markdown logo" />
+                </div>
+
+                <div class="app-header__document">
+                  <img
+                    class="app-header__document-icon"
+                    src="data:image/svg+xml,%3csvg%20width='14'%20height='16'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M13.107%203.393c.167.167.31.393.429.678.119.286.178.548.178.786v10.286c0%20.238-.083.44-.25.607a.827.827%200%200%201-.607.25h-12a.827.827%200%200%201-.607-.25.827.827%200%200%201-.25-.607V.857C0%20.62.083.417.25.25A.827.827%200%200%201%20.857%200h8c.238%200%20.5.06.786.179.286.119.512.261.678.428l2.786%202.786ZM9.143%201.214v3.357H12.5c-.06-.172-.125-.294-.196-.366L9.509%201.411c-.072-.072-.194-.137-.366-.197Zm3.428%2013.643V5.714H8.857a.827.827%200%200%201-.607-.25.827.827%200%200%201-.25-.607V1.143H1.143v13.714H12.57Z'%20fill='%23FFF'/%3e%3c/svg%3e"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div class="app-header__document-meta">
+                    <label class="app-header__document-label text-9" for="document-name"
+                      >Document Name</label
+                    >
+                    <input
+                      class="app-header__document-input"
+                      id="document-name"
+                      name="document-name"
+                      type="text"
+                      value="welcome.md"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <details class="app-header__quick-actions">
+                <summary
+                  class="quick-actions-toggle"
+                  aria-label="Toggle quick actions"
+                  data-tooltip="Quick actions"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="5" r="1"></circle>
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="12" cy="19" r="1"></circle>
+                  </svg>
+                </summary>
+
+                <div class="app-header__quick-menu" role="toolbar" aria-label="Quick actions">
+                  <div class="app-header__quick-group">
+                    <button
+                      class="quick-btn"
+                      type="button"
+                      aria-label="Edit"
+                      data-view-control
+                      data-action="editor"
+                      data-tooltip="Edit"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                      </svg>
+                    </button>
+                    <button
+                      class="quick-btn quick-btn--active"
+                      type="button"
+                      aria-label="Branch"
+                      data-view-control
+                      data-action="split"
+                      data-tooltip="Branch"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M16 3h5v5"></path>
+                        <path d="M8 3H3v5"></path>
+                        <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"></path>
+                        <path d="m15 9 6-6"></path>
+                      </svg>
+                    </button>
+                    <button
+                      class="quick-btn"
+                      type="button"
+                      aria-label="Preview"
+                      data-view-control
+                      data-action="preview"
+                      data-tooltip="Preview"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <span class="quick-divider" aria-hidden="true"></span>
+
+                  <button
+                    class="quick-btn"
+                    type="button"
+                    aria-label="Copy"
+                    data-quick-action="copy"
+                    data-tooltip="Copy"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </button>
+                  <button
+                    class="quick-btn"
+                    type="button"
+                    aria-label="Download"
+                    data-quick-action="download"
+                    data-tooltip="Download"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 3v12"></path>
+                      <path d="m7 10 5 5 5-5"></path>
+                      <path d="M5 21h14"></path>
+                    </svg>
+                  </button>
+                  <button
+                    class="quick-btn"
+                    type="button"
+                    aria-label="Delete"
+                    data-quick-action="delete"
+                    data-tooltip="Delete"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M3 6h18"></path>
+                      <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"></path>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                      <path d="M10 11v6"></path>
+                      <path d="M14 11v6"></path>
+                    </svg>
+                  </button>
+                </div>
+              </details>
+
+              <div class="app-header__actions">
+                <button
+                  class="app-header__action app-header__action--save"
+                  type="button"
+                  data-quick-action="save"
+                  data-tooltip="Save changes"
+                >
+                  <img src="data:image/svg+xml,%3csvg%20width='17'%20height='17'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M15.91%205.931%2010.575.598A.889.889%200%200%200%2010.29.41.969.969%200%200%200%209.945.34H2.834A2.667%202.667%200%200%200%20.167%203.007v10.666a2.667%202.667%200%200%200%202.667%202.667H13.5a2.667%202.667%200%200%200%202.667-2.667v-7.11a.889.889%200%200%200-.258-.632ZM5.5%202.118h3.556v1.778H5.5V2.118Zm5.334%2012.444H5.5v-2.666c0-.491.398-.89.89-.89h3.555c.49%200%20.889.399.889.89v2.666Zm3.555-.889c0%20.491-.398.89-.889.89h-.889v-2.667a2.667%202.667%200%200%200-2.666-2.667H6.389a2.667%202.667%200%200%200-2.666%202.667v2.666h-.89a.889.889%200%200%201-.888-.889V3.007c0-.491.398-.89.889-.89h.889v2.667c0%20.491.398.89.888.89h5.334c.49%200%20.889-.399.889-.89V3.371l3.555%203.556v6.746Z'%20fill='%23FFF'/%3e%3c/svg%3e" alt="" aria-hidden="true" />
+                  <span class="app-header__action-text">Save changes</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="app-header__toolbar" role="toolbar" aria-label="Markdown formatting">
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Bold"
+              data-action="bold"
+              data-tooltip="Bold"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-bold"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Italic"
+              data-action="italic"
+              data-tooltip="Italic"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-italic"
+                aria-hidden="true"
+              >
+                <line x1="19" x2="10" y1="4" y2="4"></line>
+                <line x1="14" x2="5" y1="20" y2="20"></line>
+                <line x1="15" x2="9" y1="4" y2="20"></line>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Code"
+              data-action="code"
+              data-tooltip="Code"
+            >
+              &lt;/&gt;
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Heading 1"
+              data-action="h1"
+              data-tooltip="Heading 1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-heading1"
+                aria-hidden="true"
+              >
+                <path d="M4 12h8"></path>
+                <path d="M4 18V6"></path>
+                <path d="M12 18V6"></path>
+                <path d="m17 12 3-2v8"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Heading 2"
+              data-action="h2"
+              data-tooltip="Heading 2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-heading2"
+                aria-hidden="true"
+              >
+                <path d="M4 12h8"></path>
+                <path d="M4 18V6"></path>
+                <path d="M12 18V6"></path>
+                <path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Heading 3"
+              data-action="h3"
+              data-tooltip="Heading 3"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-heading3"
+                aria-hidden="true"
+              >
+                <path d="M4 12h8"></path>
+                <path d="M4 18V6"></path>
+                <path d="M12 18V6"></path>
+                <path d="M17.5 10.5c1.7-1 3.5 0 3.5 1.5a2 2 0 0 1-2 2"></path>
+                <path d="M17 17.5c2 1.5 4 .3 4-1.5a2 2 0 0 0-2-2"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Bulleted list"
+              data-action="ul"
+              data-tooltip="Bullet list"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-list"
+                aria-hidden="true"
+              >
+                <path d="M3 12h.01"></path>
+                <path d="M3 18h.01"></path>
+                <path d="M3 6h.01"></path>
+                <path d="M8 12h13"></path>
+                <path d="M8 18h13"></path>
+                <path d="M8 6h13"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Numbered list"
+              data-action="ol"
+              data-tooltip="Numbered list"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-list-ordered"
+                aria-hidden="true"
+              >
+                <path d="M10 12h11"></path>
+                <path d="M10 18h11"></path>
+                <path d="M10 6h11"></path>
+                <path d="M4 10h2"></path>
+                <path d="M4 6h1v4"></path>
+                <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Quote"
+              data-action="quote"
+              data-tooltip="Quote"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-quote"
+                aria-hidden="true"
+              >
+                <path
+                  d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                ></path>
+                <path
+                  d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Link"
+              data-action="link"
+              data-tooltip="Link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-link"
+                aria-hidden="true"
+              >
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Image"
+              data-action="image"
+              data-tooltip="Image"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-image"
+                aria-hidden="true"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                <circle cx="9" cy="9" r="2"></circle>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+              </svg>
+            </button>
+            <button
+              class="toolbar-btn"
+              type="button"
+              aria-label="Horizontal rule"
+              data-action="hr"
+              data-tooltip="Horizontal rule"
+              data-state="closed"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-minus"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <main class="main">
+          <section class="textarea-container">
+            <!-- upper markdown preview container -->
+            <div class="review-container">
+              <p class="text-9 markdown">markdown</p>
+              <button
+                class="preview-toggle preview-toggle--editor"
+                type="button"
+                data-view-toggle
+                data-action="editor"
+                aria-label="Show preview panel"
+              >
+                <img src="data:image/svg+xml,%3csvg%20width='16'%20height='15'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M1.38.027a.795.795%200%200%201%20.769.206L14.815%2012.9a.792.792%200%200%201%200%201.124.792.792%200%200%201-1.124%200L9.234%209.567a2.77%202.77%200%200%201-3.753-3.753L1.024%201.357a.795.795%200%200%201%20.357-1.33Zm.998%203.832%201.156%201.116a10.846%2010.846%200%200%200-1.773%202.153c.696%201.117%202.929%204.038%206.333%203.959a6.127%206.127%200%200%200%201.346-.198l1.25%201.25a7.505%207.505%200%200%201-2.556.53h-.198c-4.663%200-7.331-4.282-7.83-5.145a.792.792%200%200%201%200-.792A12.58%2012.58%200%200%201%202.378%203.86Zm5.328-2.272c4.726-.143%207.52%204.267%208.028%205.145.15.24.163.542.031.792a12.58%2012.58%200%200%201-2.304%202.874l-1.195-1.116a10.846%2010.846%200%200%200%201.813-2.154c-.705-1.116-2.937-4.045-6.333-3.958a6.127%206.127%200%200%200-1.346.198L5.149%202.117a7.505%207.505%200%200%201%202.557-.53Zm-.974%205.486v.055c0%20.656.532%201.188%201.188%201.188l.047-.008-1.235-1.235Z'%20fill='%237C8187'/%3e%3c/svg%3e" alt="" aria-hidden="true" />
+              </button>
+            </div>
+
+            <!-- the textarea input div -->
+            <div class="textarea-input">
+              <textarea id="textarea" aria-label="Markdown editor"></textarea>
+            </div>
+          </section>
+          <section class="preview-container">
+            <!-- upper markdown preview container -->
+            <div class="review-container">
+              <p class="text-9 markdown">preview</p>
+              <button
+                class="preview-toggle preview-toggle--preview"
+                type="button"
+                data-view-toggle
+                data-action="preview"
+                aria-label="Hide preview panel"
+              >
+                <img src="data:image/svg+xml,%3csvg%20width='16'%20height='12'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M7.784.003c4.782-.144%207.597%204.31%208.109%205.198a.8.8%200%200%201%200%20.8c-.688%201.2-3.255%205.086-7.677%205.198h-.2c-4.71%200-7.405-4.326-7.909-5.198a.8.8%200%200%201%200-.8C.803%204.001%203.362.115%207.784.003Zm.38%201.6h-.3c-3.199.08-5.286%202.71-6.086%203.998C2.482%206.73%204.73%209.68%208.176%209.6c3.199-.08%205.262-2.711%206.086-3.999-.712-1.127-2.967-4.086-6.398-3.998ZM8%202.803A2.799%202.799%200%201%201%208%208.4a2.799%202.799%200%200%201%200-5.598Zm0%201.599A1.2%201.2%200%201%200%208%206.8a1.2%201.2%200%200%200%200-2.4Z'%20fill='%237C8187'/%3e%3c/svg%3e" alt="" aria-hidden="true" />
+              </button>
+            </div>
+
+            <!-- the textarea input div -->
+            <div class="textarea-input">
+              <div id="preview" aria-label="Markdown editor" class="preview"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+      <ol class="app-toast-stack" tabindex="-1"></ol>
+    </div>
+    <dialog class="modal" id="delete-modal">
+      <h2 class="modal__title">Delete this document?</h2>
+      <p class="modal__message">
+        Are you sure you want to delete
+        <span id="modal-doc-name" class="modal__doc-name">welcome.md</span>? This action cannot be
+        undone.
+      </p>
+      <div class="modal__actions">
+        <button
+          class="modal__btn modal__btn--cancel"
+          type="button"
+          id="cancel"
+          data-action="cancel"
+        >
+          Cancel
+        </button>
+        <button class="modal__btn modal__btn--confirm" type="button" data-action="delete-document">
+          Delete now
+        </button>
+      </div>
+    </dialog>
+  </body>
+</html>
