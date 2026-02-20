@@ -10,7 +10,8 @@ export async function initTextarea() {
 
   async function getPlaceholder() {
     try {
-      const response = await fetch(`${import.meta.env.BASE_URL}data.json`);
+      const dataUrl = new URL("../../data.json", import.meta.url);
+      const response = await fetch(dataUrl);
       const data = await response.json();
       return data?.[1]?.content ?? "";
     } catch (error) {

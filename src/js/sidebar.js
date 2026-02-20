@@ -34,6 +34,7 @@ export function renderSidebar() {
   const documentItems = document.getElementById("document-items");
   if (!documentItems) return;
 
+  const documentIconUrl = new URL("../../assets/icon-document.svg", import.meta.url);
   const documents = appState.documents; // [array of all document objects]
 
   const documenItems = documents.map((document) => {
@@ -42,7 +43,7 @@ export function renderSidebar() {
     const name = document.name || "untitled.md";
 
     const html = `<button class="document-item${isActive ? " document-item--active" : ""}" type="button" id ="${document.id}" data-document-name ="${name}">
-                <img class="document-item-icon" src="${import.meta.env.BASE_URL}assets/icon-document.svg" alt="" />
+                <img class="document-item-icon" src="${documentIconUrl}" alt="" />
                 <div class="document-info">
                   <p class="document-date">
                     <span class="document-date-label">Updated</span>
