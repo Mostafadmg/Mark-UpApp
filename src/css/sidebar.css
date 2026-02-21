@@ -8,7 +8,8 @@
   /* Keep sidebar in flex layout - it will push content */
   width: 12.625rem;
   flex-shrink: 0; /* Don't shrink sidebar */
-  height: 100vh;
+  height: 100%;
+  min-height: 0;
   background: var(--colors-slate-950, #1d1f22);
   padding: var(--spacing-300, 1.5rem) var(--spacing-200, 1rem);
   display: flex;
@@ -34,6 +35,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-300, 1.5rem);
+  flex: 1;
+  min-height: 0;
 }
 
 .sidebar-title {
@@ -84,6 +87,11 @@
   justify-content: flex-start;
   align-items: stretch;
   gap: var(--spacing-200, 1rem);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.25rem;
 }
 
 .document-item {
@@ -185,13 +193,18 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
 }
 
 .sidebar-theme {
   margin-top: auto;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--spacing-100, 0.5rem);
+  padding-top: var(--spacing-200, 1rem);
+  border-top: 1px solid var(--theme-border, #5a6069);
 }
 
 .theme-icon {
